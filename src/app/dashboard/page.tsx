@@ -19,7 +19,7 @@ import {
 
 interface pageProps { }
 
-const page: FC<pageProps> = ({ }) => {
+const Page: FC<pageProps> = ({ }) => {
     const todos = useTodosStore(state => state.todos)
     const columns = useMemo(() => ({
         "not-started": {
@@ -125,4 +125,4 @@ const page: FC<pageProps> = ({ }) => {
     </div>
 }
 
-export default page
+export default Page

@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 interface pageProps { }
 
-const page: FC<pageProps> = ({ }) => {
+const Page: FC<pageProps> = ({ }) => {
   const router = useRouter()
   const user = useUserStore(state => state.user)
 
@@ -33,4 +33,4 @@ const page: FC<pageProps> = ({ }) => {
   </div>
 }
 
-export default page
+export default Page

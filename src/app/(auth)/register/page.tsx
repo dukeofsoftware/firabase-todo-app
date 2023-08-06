@@ -22,7 +22,7 @@ import { useUserStore } from '@/hooks/useUser';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 interface pageProps { }
 
-const page: FC<pageProps> = ({ }) => {
+const Page: FC<pageProps> = ({ }) => {
   const router = useRouter()
   const user = useUserStore(state => state.user)
   const form = useForm<AuthType>({
@@ -103,4 +103,4 @@ const page: FC<pageProps> = ({ }) => {
   </div>
 }
 
-export default page
+export default Page
