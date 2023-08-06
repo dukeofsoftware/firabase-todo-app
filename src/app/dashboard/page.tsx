@@ -7,20 +7,24 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { toast } from '@/components/ui/use-toast'
 import { useTodosStore } from '@/hooks/useTodoStore'
 import { useUserStore } from '@/hooks/useUser'
-import { auth, emailVerification, updateTodoFirebase } from '@/lib/firebase'
-import { onValue } from 'firebase/database'
+import { emailVerification, updateTodoFirebase } from '@/lib/firebase'
 import { useRouter } from 'next/navigation'
-import { FC, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import {
     DragDropContext,
     Droppable,
-
 } from "react-beautiful-dnd"
 
-interface pageProps { }
 
-const Page: FC<pageProps> = ({ }) => {
+const Page = ({ }) => {
+    const [isMounted, setIsMounted] = useState(false)
+    useEffect(() => {
+        setIsMounted(true)
+    }, [])
+    if (!isMounted) return null
     const todos = useTodosStore(state => state.todos)
+    const router = useRouter()
+
     const columns = useMemo(() => ({
         "not-started": {
             name: "Not Started",
@@ -37,7 +41,6 @@ const Page: FC<pageProps> = ({ }) => {
 
     }), [todos])
     const user = useUserStore(state => state.user)
-    const router = useRouter()
     if (!user) {
         router.push("/login")
     }
@@ -63,7 +66,7 @@ const Page: FC<pageProps> = ({ }) => {
         try {
 
             await updateTodoFirebase(result.destination.droppableId, result.draggableId)
-            
+
         } catch (error: any) {
             toast({
                 title: "Error",
@@ -74,6 +77,7 @@ const Page: FC<pageProps> = ({ }) => {
         }
 
     }
+
     if (!user) return null
     if (!user.emailVerified) return (
         <div className='h-[95vh] flex flex-col items-center justify-center gap-3'>
@@ -94,7 +98,7 @@ const Page: FC<pageProps> = ({ }) => {
                 {Object.entries(columns).map(([columnId, column], index) => {
                     return (
                         <Droppable key={columnId} droppableId={columnId}>
-                            {(provided, snapshot) => (
+                            {(provided) => (
                                 <Card className='grow w-full'
 
                                 >
