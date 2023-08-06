@@ -1,4 +1,4 @@
-import { enumType, minLength, object, type Output, string } from "valibot"; // 0.76 kB
+import { enumType, minLength, object, type Output, string } from "valibot"; 
 
 // Create login schema with email and password
 export const todoSchema = object({
