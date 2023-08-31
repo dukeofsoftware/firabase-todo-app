@@ -18,6 +18,7 @@ Basic todo app built with firebase and react-beautiful-dnd
 `NEXT_PUBLIC_MESSAGING_SENDER_ID`
 
 `NEXT_PUBLIC_APP_ID`=
+
 `NEXT_PUBLIC_DATABASE_URL`=
 ## Screen Shots
 
